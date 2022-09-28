@@ -11,11 +11,22 @@ library(here)
 library(janitor)
 ```
 
-##load in 2022 data
+##load in all data
 ```{r}
 thisfile=here("data_raw","DL_SelectFields2022.zip")
-
 df2022=read_csv(thisfile) %>% clean_names()
+
+thisfile=here("data_raw","airline_data_2021.zip")
+df2021=read_csv(thisfile) %>% clean_names()
+
+thisfile=here("data_raw","DL_SelectFields_2020.zip")
+df2020=read_csv(thisfile) %>% clean_names()
+
+thisfile=here("data_raw","airline_data_2018.zip")
+df2018=read_csv(thisfile) %>% clean_names()
+
+thisfile=here("data_raw","DL_SelectFields_2017.zip")
+df2017=read_csv(thisfile) %>% clean_names()
 ```
 
 ##myspace
@@ -23,5 +34,14 @@ df2022=read_csv(thisfile) %>% clean_names()
 df1 <- df2022 %>% filter(passengers>0, origin =="LGA", unique_carrier_name == "Spirit Air Lines")
 
 df1 %>% ggplot(aes(month)) + geom_bar()
+```
+##Combine data sets (bind_rows)
+```{r}
+df_c <- bind_rows(df2017, df2018, df2020, df2021, df2022)
+```
+
+##create plot
+```{r}
+df_c %>% mutate(all_month = )
 ```
 
