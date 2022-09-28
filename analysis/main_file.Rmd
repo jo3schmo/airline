@@ -42,6 +42,6 @@ df_c <- bind_rows(df2017, df2018, df2020, df2021, df2022)
 
 ##create plot
 ```{r}
-df_c %>% mutate(all_month = )
+df_c %>% ggplot(aes(month)) + geom_bar()
 ```
 
