@@ -37,7 +37,7 @@ df1 %>% ggplot(aes(month)) + geom_bar()
 ```
 ##months as one continuous
 ```{r}
-
+## df2018 %>% replace(df2018, 1, 11)
 ```
 
 
@@ -48,6 +48,6 @@ df_c <- bind_rows(df2017, df2018, df2020, df2021, df2022)
 
 ##create plot
 ```{r}
-df_c %>% ggplot(aes(month)) + geom_bar()
+df_c %>% ggplot(aes(month,weight=seats)) + geom_bar()
 ```
 
