@@ -35,6 +35,12 @@ df1 <- df2022 %>% filter(passengers>0, origin =="LGA", unique_carrier_name == "S
 
 df1 %>% ggplot(aes(month)) + geom_bar()
 ```
+##months as one continuous
+```{r}
+
+```
+
+
 ##Combine data sets (bind_rows)
 ```{r}
 df_c <- bind_rows(df2017, df2018, df2020, df2021, df2022)
