@@ -21,7 +21,7 @@ df2022=read_csv(thisfile) %>% clean_names()
 
 
 ```{r}
-df1 <- df2022 %>% filter(seats>0, origin =="LGA", unique_carrier_name == "Spirit Air Lines")
+df1 <- df2022 %>% filter(ramp_to_ramp>0, origin =="LGA", unique_carrier_name == "Spirit Air Lines")
 
 df1 %>% ggplot(aes(month)) + geom_bar()
 ```
