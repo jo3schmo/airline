@@ -37,7 +37,7 @@ df1 %>% ggplot(aes(month)) + geom_bar()
 ```
 ##months as one continuous
 ```{r}
-## df2018 %>% replace(df2018, 1, 11)
+## df2018 %>% if(month==1){replace(1,11)}
 ```
 
 
