@@ -8,6 +8,12 @@ output: html_notebook
 library(tidyverse)
 library(here)
 library(janitor)
+library(readr)
+library(ggplot2)
+library(forecast)
+library(fpp2)
+library(TTR)
+library(dplyr)
 ```
 
 ##load in all data
@@ -26,5 +32,18 @@ df_1 = df_m %>% filter(catalog=="131", section <10)
 ```{r}
 linear_regression <- lm(term ~ tot_enrl, data = df_1)
 summary(linear_regression)
+```
+
+## smoothing?
+```{r}
+df_use <- select(df_1, term, tot_enrl)
+df_2 <- arrange(df_use,term)
+avrg = mean(df_2$tot_enrl)
+df_2[18,2] = avrg
+```
+
+##plot
+```{r}
+df_2 %>% ggplot(aes(x=term,y=tot_enrl))+geom_point()
 ```
 
