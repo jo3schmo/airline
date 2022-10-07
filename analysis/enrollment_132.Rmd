@@ -37,7 +37,8 @@ df_1 <- df_m %>%
 df_2 <- df_1 %>%
   select(ay, tot_enrl, section, catalog, term2) %>%
   filter(catalog == "131") %>%
-  separate(term2, c("semester","year"),sep = " ")
+  separate(term2, c("semester","year"),sep = " ") %>%
+  rename(tot_enrl_131 = tot_enrl)
  
 df_3 <- df_1 %>%
   select(ay, tot_enrl, section, catalog, term2) %>%
@@ -46,7 +47,7 @@ df_3 <- df_1 %>%
   rename(tot_enrl_132 = tot_enrl)
 
 
-ggplot(df_2, aes(year, tot_enrl)) +geom_point()
+ggplot(df_2, aes(year, tot_enrl_131)) +geom_point()
 
 ```
 
@@ -55,6 +56,6 @@ ggplot(df_2, aes(year, tot_enrl)) +geom_point()
 ```{r}
 df_4 <- merge(df_2, df_3,by="year")
 
-ggplot(df_4, aes(tot_enrl, tot_enrl_132)) + geom_point()
+ggplot(df_4, aes(tot_enrl_131, tot_enrl_132)) + geom_point()
 ```
 
