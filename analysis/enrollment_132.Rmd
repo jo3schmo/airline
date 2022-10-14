@@ -38,15 +38,15 @@ df_2 <- df_1 %>%
   select(ay, tot_enrl, section, catalog, term2) %>%
   filter(catalog == "131") %>%
   separate(term2, c("semester","year"),sep = " ") %>%
-  rename(tot_enrl_131 = tot_enrl) %>%
-  filter(!row_number() %in% c(10))
+  rename(tot_enrl_131 = tot_enrl) 
+## %>% filter(!row_number() %in% c(10))
  
 df_3 <- df_1 %>%
   select(ay, tot_enrl, section, catalog, term2) %>%
   filter(catalog == "132") %>%
   separate(term2, c("semester","year"),sep = " ") %>%
-  rename(tot_enrl_132 = tot_enrl) %>%
-  filter(!row_number() %in% c(14))
+  rename(tot_enrl_132 = tot_enrl) 
+## %>% filter(!row_number() %in% c(14))
 
 
 ggplot(df_2, aes(year, tot_enrl_131)) +geom_point()
@@ -67,24 +67,16 @@ ggplot(df_4, aes(tot_enrl_131, tot_enrl_132)) + geom_point()
 mult.reg.enrl131 <- lm(tot_enrl_131 ~ ay + semester, data = df_2)
 summary(mult.reg.enrl131)
 
-mult.reg.enrl132 <- lm(tot_enrl_132 ~ ay + semester, data = df_3)
+mult.reg.enrl132 <- lm(tot_enrl_132 ~ ay + section, data = df_3)
 summary(mult.reg.enrl132)
 ```
 
 ## finding values
 ```{r}
-df_2 <- df_1 %>%
-  select(ay, tot_enrl, section, catalog, term2) %>%
-  filter(catalog == "131") %>%
-  separate(term2, c("semester","year"),sep = " ") %>%
-  rename(tot_enrl_131 = tot_enrl)
+df_3[13,2]
+Spring_2022_132 = df_3[13,1]*-1.067 + +5.562+df_3[13,2]
+Spring_2022_132
 
-df_3 <- df_1 %>%
-  select(ay, tot_enrl, section, catalog, term2) %>%
-  filter(catalog == "132") %>%
-  separate(term2, c("semester","year"),sep = " ") %>%
-  rename(tot_enrl_132 = tot_enrl)
-
-
+df_3[14,2]=Spring_2022_132
 ```
 
