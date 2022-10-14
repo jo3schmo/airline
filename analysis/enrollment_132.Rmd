@@ -74,7 +74,7 @@ summary(mult.reg.enrl132)
 ## finding values
 ```{r}
 ##df_3[13,2]
-Spring_2022_132 = df_3[13,1]*-1.067 + +5.562+df_3[13,2]
+Spring_2022_132 = df_3[13,1]*-1.067 + +5.562+53.416
 Spring_2022_132
 
 df_3[14,2]=Spring_2022_132
