@@ -27,8 +27,8 @@ view(dennys)
 ```
 rows = 1643
 columns = 6
-columns -> address city state zip 
-each row is a dennys location
+columns -> address city state zip latitude longitude
+each row is a specific location
 
 ### Exercise 2
 
@@ -39,13 +39,13 @@ view(laquinta)
 ```
 rows = 909
 columns = 6
-columns -> address city state zip 
-each row is a La Quinta location
+columns -> address city state zip latitude longitude
+each row is a specific La Quinta location
 
 ### Exercise 3
 
 No out of country dennys
-There is out of country La Quinta... chile and columbia
+There is out of country La Quinta... chile, columbia etc
 
 ### Exercise 4
 
@@ -53,7 +53,7 @@ There is out of country La Quinta... chile and columbia
 view(dennys)
 view(laquinta)
 ```
-we could use filter to find out of country locations
+we could use the filter function on the data to find out of country locations
 
 
 ### Exercise 5
@@ -111,7 +111,7 @@ laquinta %>%
   count(state) %>%
   inner_join(states, by = c("state" = "abbreviation"))
 ```
-Texas has the most Laquintas, Miane has the least
+Texas has the most Laquintas, Maine has the least
 
 ##Exerice 10
 ```{r}
