@@ -1,0 +1,106 @@
+---
+title: "Lab 05"
+author: "Joseph White"
+date: "10/19/22"
+output: github_document
+---
+
+### Load packages and data
+
+```{r load-packages, message = FALSE}
+library(tidyverse) 
+library(dsbox)
+```
+
+
+## ex 1
+```{r}
+dn_ak <- dennys %>%
+  filter(state == "AK")
+nrow(dn_ak)
+```
+
+## ex 2
+```{r}
+lq_ak <- laquinta %>%
+  filter(state == "AK")
+nrow(lq_ak)
+```
+
+
+##ex 3
+```{r}
+dn_lq_ak <- full_join(dn_ak, lq_ak, by = "state")
+dn_lq_ak
+```
+
+6 distances that need to be calcullated
+
+## ex 4
+```{r}
+summary(dn_lq_ak)
+nrow(dn_lq_ak)
+```
+
+There are 11 varaibles with 6 observations each
+variables names: address.x, city.x, state, zip.x, longitude.x, latitude.x, address.y, city.y, zip.y, longitude.y, latitude.y
+
+## exercise 5
+we should use the mutate function?
+
+#exercise 6
+```{r}
+long1 = dn_lq_ak[6,5]
+lat1 = dn_lq_ak[6,6]
+long2 = dn_lq_ak[6,10]
+lat2 = dn_lq_ak[6,11]
+
+# convert to radians
+  long1 = long1 * pi / 180
+  lat1  = lat1  * pi / 180
+  long2 = long2 * pi / 180
+  lat2  = lat2  * pi / 180
+  
+  R = 6371 # Earth mean radius in km
+  
+  a = sin((lat2 - lat1)/2)^2 + cos(lat1) * cos(lat2) * sin((long2 - long1)/2)^2
+  d = R * 2 * asin(sqrt(a))
+
+distance <- haversine(long1, lat1, long2, lat2, round = 3)
+  
+  d # distance in km
+
+```
+```{r}
+long1 = dn_lq_ak[6,5]
+lat1 = dn_lq_ak[6,6]
+long2 = dn_lq_ak[6,10]
+lat2 = dn_lq_ak[6,11]
+
+distance <- haversine(long1, lat1, long2, lat2, round = 3)
+distance
+
+
+```
+```{r}
+lab5df <- dn_lq_ak %>% mutate_all(haversine(longitude.x, latitude.x, longitude.y, latitude.y, round = 3))
+```
+```{r}
+haversine <- function(long1, lat1, long2, lat2, round = 3) {
+  # convert to radians
+  long1 = long1 * pi / 180
+  lat1  = lat1  * pi / 180
+  long2 = long2 * pi / 180
+  lat2  = lat2  * pi / 180
+  
+  R = 6371 # Earth mean radius in km
+  
+  a = sin((lat2 - lat1)/2)^2 + cos(lat1) * cos(lat2) * sin((long2 - long1)/2)^2
+  d = R * 2 * asin(sqrt(a))
+  
+  return( round(d,round) ) # distance in km
+}
+
+dn_lq_ak = dn_lq_ak %>% mutate(distance= haversine(longitude.x, latitude.x, longitude.y, latitude.y, round = 3))
+```
+
