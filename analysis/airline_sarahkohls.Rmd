@@ -26,4 +26,3 @@ df1 %>% ggplot(aes(month,fill=dest)) + geom_bar()+facet_wrap(~dest)
 ```
 
 
-
