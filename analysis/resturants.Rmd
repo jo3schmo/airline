@@ -23,7 +23,7 @@ lq_ny <- laquinta %>%
 
 ```{r}
 mc_ny <- restu %>%
-  filter(province == "NY") %>%
+  filter(province == "NY", name == "McDonald's") %>%
   slice_sample(n = 40) %>%
   rename(state = province)
 ```
