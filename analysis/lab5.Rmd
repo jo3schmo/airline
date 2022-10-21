@@ -50,48 +50,6 @@ we should use the mutate function?
 
 #exercise 6
 ```{r}
-<<<<<<< HEAD
-long1 = dn_lq_ak[6,5]
-lat1 = dn_lq_ak[6,6]
-long2 = dn_lq_ak[6,10]
-lat2 = dn_lq_ak[6,11]
-
-# convert to radians
-=======
-haversine <- function(long1, lat1, long2, lat2, round = 3) {
-  # convert to radians
->>>>>>> 6f1763d65d5a890f4ac4bbf2a7781d81da5a34eb
-  long1 = long1 * pi / 180
-  lat1  = lat1  * pi / 180
-  long2 = long2 * pi / 180
-  lat2  = lat2  * pi / 180
-  
-  R = 6371 # Earth mean radius in km
-  
-  a = sin((lat2 - lat1)/2)^2 + cos(lat1) * cos(lat2) * sin((long2 - long1)/2)^2
-  d = R * 2 * asin(sqrt(a))
-<<<<<<< HEAD
-
-distance <- haversine(long1, lat1, long2, lat2, round = 3)
-  
-  d # distance in km
-
-```
-```{r}
-long1 = dn_lq_ak[6,5]
-lat1 = dn_lq_ak[6,6]
-long2 = dn_lq_ak[6,10]
-lat2 = dn_lq_ak[6,11]
-
-distance <- haversine(long1, lat1, long2, lat2, round = 3)
-distance
-
-
-```
-```{r}
-lab5df <- dn_lq_ak %>% mutate_all(haversine(longitude.x, latitude.x, longitude.y, latitude.y, round = 3))
-```
-```{r}
 haversine <- function(long1, lat1, long2, lat2, round = 3) {
   # convert to radians
   long1 = long1 * pi / 180
@@ -103,14 +61,6 @@ haversine <- function(long1, lat1, long2, lat2, round = 3) {
   
   a = sin((lat2 - lat1)/2)^2 + cos(lat1) * cos(lat2) * sin((long2 - long1)/2)^2
   d = R * 2 * asin(sqrt(a))
-  
-  return( round(d,round) ) # distance in km
-}
-
-dn_lq_ak = dn_lq_ak %>% mutate(distance= haversine(longitude.x, latitude.x, longitude.y, latitude.y, round = 3))
-```
-
-=======
   
   return( round(d,round) ) # distance in km
 }
@@ -202,4 +152,4 @@ boxplot(df, show.names=TRUE)
 
 # exercise 12
 Mitch Hedberg’s joke held true the most for Alaska. We decided so because the distribution of the closest distances is most consistently low and there are less outliers than Texas
->>>>>>> 6f1763d65d5a890f4ac4bbf2a7781d81da5a34eb
+
