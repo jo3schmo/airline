@@ -65,7 +65,39 @@ mc_lq_ny_mindist <- mc_lq_ny %>%
 
 # create visualization
 ```{r}
-df <- mc_lq_ny_mindist %>% select(closest) %>% filter(closest < 200)
-boxplot(df, show.names=TRUE)
+df_mc <- mc_lq_ny_mindist %>% select(closest) %>% filter(closest < 200)
+boxplot(df_mc, show.names=TRUE)
+```
+
+## compare to dennys
+```{r}
+dn_ny <- dennys %>%
+  filter(state == "NY")
+
+lq_ny <- laquinta %>%
+  filter(state == "NY")
+
+dn_lq_ny <- full_join(dn_ny, lq_ny, by = "state")
+
+dn_lq_ny = dn_lq_ny %>% mutate(distance = haversine(longitude.x, latitude.x, longitude.y, latitude.y, round = 4))
+
+dn_lq_ny_mindist <- dn_lq_ny %>%
+  group_by(address.x) %>%
+  summarise(closest = min(distance))
+```
+
+## visulize dennys la quinta new york
+```{r}
+df_dn <- dn_lq_ny_mindist %>% select(closest)
+boxplot(df_dn, show.names=TRUE)
+```
+
+## show both
+```{r}
+df_dn <- dn_lq_ny_mindist %>% select(closest)
+boxplot(df_dn, show.names=TRUE)
+
+df_mc <- mc_lq_ny_mindist %>% select(closest) %>% filter(closest < 200)
+boxplot(df_mc, show.names=TRUE)
 ```
 
