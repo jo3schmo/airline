@@ -1,0 +1,30 @@
+---
+title: "bike_stuff"
+author: "Joseph White"
+date: "10/27/22"
+output: github_document
+---
+
+```{r}
+library(tidyverse) 
+library(dsbox)
+```
+
+```{r}
+bike_data <- read_csv("202209-capitalbikeshare-tripdata.csv")
+```
+
+```{r}
+bike_data_m <- bike_data %>%
+  filter(member_casual == "member")
+
+bike_data_c <- bike_data %>%
+  filter(member_casual == "casual")
+
+ggplot(bike_data_m, mapping = aes(x = start_lng, y = start_lat)) +
+  geom_point()
+
+ggplot(bike_data_c, mapping = aes(x = start_lng, y = start_lat)) +
+  geom_point()
+```
+
